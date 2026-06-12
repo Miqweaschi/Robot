@@ -1,7 +1,12 @@
 package Gioco;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.Timer;
 import Robot.Robot;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainGame {
 
@@ -23,12 +28,13 @@ public class MainGame {
      * 3 = Uscita
      * 0 = Vuoto
      */
-
+    public static Feromoni mappaFeromoni;
 
     public static void main(String[] args) {
 
-        JFrame frame = new JFrame("ROBOT.Robot 3");  /// Creazione finestra jFrame con titolo
+        JFrame frame = new JFrame("ROBOT.Robot 3");  /// Creazione finestra JFrame con titolo
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mappaFeromoni = new Feromoni(Mappa);
 
         Robot Pino = new Robot("Pino", 1, 8); /// Creazione del robot con nome e posizione iniziale
 
@@ -39,5 +45,26 @@ public class MainGame {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        Timer gameTimer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int oldX = Pino.getPosizione().x;
+                int oldY = Pino.getPosizione().y;
+                Mappa[oldY][oldX] = 0;
+
+                Pino.muoviti(Mappa);
+
+                int newX = Pino.getPosizione().x;
+                int newY = Pino.getPosizione().y;
+                Mappa[newY][newX] = 2;
+
+
+                Pannello.updatePannello(Mappa);
+            }
+        });
+
+        gameTimer.start();
     }
 }
