@@ -74,7 +74,7 @@ public class Robot {
                 }
             }
         }
-        // Se non siamo già in EvadeState, resettiamo il robot allo stato di default
+        /// Se non siamo già in EvadeState, resettiamo il robot allo stato di default
         if (!(statoCorrente instanceof EvadeState) && this.passi >= 4) {
             this.passi = 0;
             this.setState(new EvadeState());

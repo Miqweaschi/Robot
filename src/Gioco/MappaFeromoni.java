@@ -4,13 +4,13 @@ import java.awt.Point;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Feromoni {
+public class MappaFeromoni {
 
-    // Questa matrice conterrà i valori del "profumo"
-    // Più alto è il numero, più siamo vicini all'uscita.
+    /// Questa matrice conterrà i valori del "profumo"
+    /// Più alto è il numero, più siamo vicini all'uscita.
     private double[][] mappaOdori;
 
-    public Feromoni(int[][] levelData) {
+    public MappaFeromoni(int[][] levelData) {
         calcolaOdori(levelData);
     }
 
@@ -19,10 +19,10 @@ public class Feromoni {
         int cols = levelData[0].length;
         mappaOdori = new double[rows][cols];
 
-        // Coda per l'algoritmo di esplorazione (BFS)
+        /// Coda per l'algoritmo di esplorazione (BFS)
         Queue<Point> coda = new LinkedList<>();
 
-        // 1. Troviamo l'uscita (codice 3) e facciamo partire l'odore da lì
+        ///  Troviamo l'uscita (codice 3) e facciamo partire l'odore da lì
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
                 if (levelData[y][x] == 3) {
@@ -34,27 +34,27 @@ public class Feromoni {
             }
         }
 
-        // 2. Espandiamo l'odore (feromone) nel labirinto
+        /// Espandiamo il feromone nel labirinto
         int[][] direzioni = {{0,1}, {0,-1}, {1,0}, {-1,0}, {1,1}, {1,-1}, {-1,1}, {-1,-1}};
 
         while (!coda.isEmpty()) {
             Point corrente = coda.poll();
             double valoreCorrente = mappaOdori[corrente.y][corrente.x];
 
-            // Controlliamo i vicini
+            /// Controlliamo i vicini
             for (int[] dir : direzioni) {
                 int nx = corrente.x + dir[0];
                 int ny = corrente.y + dir[1];
 
-                // Se è dentro la mappa
+                /// Se è dentro la mappa
                 if (ny >= 0 && ny < rows && nx >= 0 && nx < cols) {
-                    // Se NON è un muro (1) e non ha ancora un odore assegnato
+                    /// Se NON è un muro (1) e non ha ancora un odore assegnato
                     if (levelData[ny][nx] != 1 && mappaOdori[ny][nx] == 0.0) {
 
-                        // Il profumo diminuisce leggermente allontanandosi
+                        /// Il profumo diminuisce leggermente allontanandosi
                         mappaOdori[ny][nx] = valoreCorrente - 1.0;
 
-                        // Aggiungiamo alla coda per processare i suoi vicini dopo
+                        /// Aggiungiamo alla coda per processare i suoi vicini dopo
                         coda.add(new Point(nx, ny));
                     }
                 }

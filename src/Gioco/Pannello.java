@@ -35,11 +35,30 @@ public class Pannello extends JPanel {
             int y = row * CASELLA;
 
             switch(ValoreCasella){
-                case 1: g.setColor(Color.BLACK); break;  /// Muro con colore Nero
+                case 1:
+                    g.setColor(Color.BLACK);
+                    break;  /// Muro
 
-                case 2: g.setColor(Color.BLUE); break;  /// Robot con colore Blu
+                case 2:
+                    g.setColor(Color.BLUE);
+                    break;  /// Robot
 
-                case 3: g.setColor(Color.GREEN); break;
+                case 3:
+                    g.setColor(Color.GREEN);
+                    break;  /// Uscita
+
+                case 4:
+                    g.setColor(Color.RED);
+                    break; /// Oggetto rosso Pursuit
+
+                case 5:
+                    g.setColor(Color.YELLOW);
+                    break; /// Oggetto Giallo Flee
+
+                case 6:
+                    g.setColor(Color.CYAN);
+                    break; /// Oggetto Ciano Seek
+
                 default: g.setColor(Color.WHITE);
                 }
 
