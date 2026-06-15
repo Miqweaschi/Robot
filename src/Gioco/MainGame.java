@@ -30,8 +30,14 @@ public class MainGame {
     
     public static MappaFeromoni mappaFeromoni;
 
-    public static void main(String[] args) {
+    private static ClassificaTarget gestioneClassifica;
 
+    public static void main(String[] args) {
+        // Istanziamo l'Adapter per gestire la persistenza dei punteggi
+        gestioneClassifica = new ClassificaAdapter();
+
+        // TRACCIA: Mostra la classifica all'inizio di ogni partita
+        gestioneClassifica.visualizzaClassifica();
         JFrame frame = new JFrame("Robot");  /// Creazione finestra JFrame con titolo
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mappaFeromoni = new MappaFeromoni(Mappa);
@@ -58,6 +64,18 @@ public class MainGame {
 
                 int newX = Pino.getPosizione().x;
                 int newY = Pino.getPosizione().y;
+
+                if (Mappa[newY][newX] == 3) {
+                    System.out.println("VITTORIA! Uscita raggiunta.");
+                    ((Timer)e.getSource()).stop(); // Ferma il timer di gioco
+
+                    // Salviamo il record corrente tramite l'interfaccia Target dell'Adapter
+                    gestioneClassifica.salvaPunteggio(Pino.getNome(), Pino.getPassiTotali());
+
+                    // TRACCIA: Mostra la classifica aggiornata alla fine della partita
+                    gestioneClassifica.visualizzaClassifica();
+                    return;
+                }
 
 
                 if (Math.random() <= 0.20) { // 20% di probabilità

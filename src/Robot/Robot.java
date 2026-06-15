@@ -1,11 +1,9 @@
 package Robot;
 
-
 import Robot.state.EvadeState;
 import Robot.state.FleeState;
 import Robot.state.PursuitState;
 import Robot.state.SeekState;
-
 import java.awt.Point;
 
 public class Robot {
@@ -13,18 +11,22 @@ public class Robot {
     private Point posizione;
     private RobotState statoCorrente;
     int passi;
+    int passiTotali;
 
     public Robot(String nome,int StartX, int StartY){
         this.nome = nome;
         this.posizione = new Point(StartX,StartY);
         this.statoCorrente = new EvadeState();
+        this.passiTotali = 0;
+
     }
 
     public void muoviti(int[][] mazeGrid) {
         /// Prima di muoversi, controlla se c'è qualcosa vicino che fa cambiare stato
         controllaFeromoni(mazeGrid);
+        this.passiTotali = passiTotali +1;
         this.passi = this.passi + 1;
-        /// 2. Poi esegue la mossa dello stato attuale
+        /// Poi esegue la mossa dello stato attuale
         statoCorrente.move(this, mazeGrid);
     }
 
@@ -93,5 +95,13 @@ public class Robot {
     public void setPosizione(int x, int y) {
         this.posizione.x = x;
         this.posizione.y = y;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public int getPassiTotali() {
+        return  this.passiTotali;
     }
 }
