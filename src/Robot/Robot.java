@@ -6,6 +6,8 @@ import Robot.state.PursuitState;
 import Robot.state.SeekState;
 import java.awt.Point;
 
+
+/// Attributi (Lo stato)
 public class Robot {
     private String nome;
     private Point posizione;
@@ -13,6 +15,8 @@ public class Robot {
     int passi;
     int passiTotali;
 
+
+    /// Costruttore (l'atto di nascita)
     public Robot(String nome,int StartX, int StartY){
         this.nome = nome;
         this.posizione = new Point(StartX,StartY);
@@ -21,6 +25,8 @@ public class Robot {
 
     }
 
+
+    /// Metodi (Il comportamento)
     public void muoviti(int[][] mazeGrid) {
         /// Prima di muoversi, controlla se c'è qualcosa vicino che fa cambiare stato
         controllaFeromoni(mazeGrid);

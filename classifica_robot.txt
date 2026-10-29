@@ -1,0 +1,8 @@
+Pino1,146
+Pino2,83
+Pino3,42
+Pino4,39
+Pino5,145
+
+PasqualePagano,92
+Pino,27

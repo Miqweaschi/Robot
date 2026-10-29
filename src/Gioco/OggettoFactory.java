@@ -1,5 +1,4 @@
 package Gioco;
-import Gioco.OggettoMappa;
 import Gioco.feromoni.*;
 
 /**

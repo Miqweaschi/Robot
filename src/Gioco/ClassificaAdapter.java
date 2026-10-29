@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ClassificaAdapter implements ClassificaTarget {
 
-    // Composizione: manteniamo un riferimento all'oggetto da adattare
+    /// Composizione: manteniamo un riferimento all'oggetto da adattare
     private final ScrittoreFile vecchioScrittore;
 
     public ClassificaAdapter() {
